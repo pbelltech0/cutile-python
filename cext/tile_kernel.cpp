@@ -1330,84 +1330,6 @@ static Result<Grid> parse_grid(PyObject* tuple) {
     return grid;
 }
 
-struct TileLaunchConfiguration {
-    vectorcallfunc vectorcall;
-    PyPtr dispatcher;
-    Grid grid;
-    CUstream stream;
-};
-
-static PyObject* TileLaunchConfiguration_vectorcall(PyObject* self, PyObject *const *args,
-                                                    size_t nargsf, PyObject* kwnames) {
-    if (kwnames) {
-        PyErr_SetString(PyExc_TypeError, "Keyword arguments are not supported");
-        return nullptr;
-    }
-
-    TileLaunchConfiguration& config = py_unwrap<TileLaunchConfiguration>(self);
-
-    Py_ssize_t num_args = PyVectorcall_NARGS(nargsf);
-
-    if (!launch(config.dispatcher.get(), config.grid, config.stream, args, num_args))
-        return nullptr;
-
-    return Py_NewRef(Py_None);
-}
-
-static PyObject* TileLaunchConfiguration_call(PyObject* self, PyObject* args, PyObject* kwargs) {
-    if (kwargs) {
-        PyErr_SetString(PyExc_TypeError, "Keyword arguments are not supported");
-        return nullptr;
-    }
-
-    TileLaunchConfiguration& config = py_unwrap<TileLaunchConfiguration>(self);
-
-    PyObject** pyargs = &_PyTuple_CAST(args)->ob_item[0];
-    Py_ssize_t num_pyargs = PyTuple_GET_SIZE(args);
-
-    if (!launch(config.dispatcher.get(), config.grid, config.stream, pyargs, num_pyargs))
-        return nullptr;
-
-    return Py_NewRef(Py_None);
-}
-
-static int TileLaunchConfiguration_init(PyObject* self, PyObject* args, PyObject* kwargs) {
-    const char* keywords[] = {"dispatcher", "grid", "stream", nullptr};
-    PyObject* dispatcher = nullptr;
-    PyObject* py_grid = nullptr;
-    PyObject* py_stream = nullptr;
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!OO", const_cast<char**>(keywords),
-                                     &TileDispatcher_type, &dispatcher,
-                                     &py_grid, &py_stream))
-        return -1;
-
-    Result<Grid> grid = parse_grid(py_grid);
-    if (!grid.is_ok()) return -1;
-
-    Result<CUstream> stream_parsed = parse_stream(py_stream);
-    if (!stream_parsed.is_ok()) return -1;
-
-    TileLaunchConfiguration& config = py_unwrap<TileLaunchConfiguration>(self);
-    config.vectorcall = TileLaunchConfiguration_vectorcall,
-    config.dispatcher = newref(dispatcher);
-    config.grid = *grid;
-    config.stream = *stream_parsed;
-
-    return 0;
-}
-
-static PyTypeObject TileLaunchConfiguration_type = {
-    .tp_name = "cuda.tile._cext.TileLaunchConfiguration",
-    .tp_basicsize = sizeof(PythonWrapper<TileLaunchConfiguration>),
-    .tp_dealloc = pywrapper_dealloc<TileLaunchConfiguration>,
-    .tp_vectorcall_offset = offsetof(PythonWrapper<TileLaunchConfiguration>, object)
-                            + offsetof(TileLaunchConfiguration, vectorcall),
-    .tp_call = TileLaunchConfiguration_call,
-    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_VECTORCALL,
-    .tp_init = TileLaunchConfiguration_init,
-    .tp_new = pywrapper_new<TileLaunchConfiguration>,
-};
-
 #define LAUNCH_SIGNATURE "launch(stream, grid, kernel, kernel_args, /)"
 
 static constexpr int MIN_DRIVER_VERSION = 13000;
@@ -1757,13 +1679,6 @@ Status tile_kernel_init(PyObject* m) {
 
     if (PyModule_AddObjectRef(m, "TileDispatcher",
                 reinterpret_cast<PyObject*>(&TileDispatcher_type)) < 0)
-        return ErrorRaised;
-
-    if (PyType_Ready(&TileLaunchConfiguration_type) < 0)
-        return ErrorRaised;
-
-    if (PyModule_AddObjectRef(m, "TileLaunchConfiguration",
-                reinterpret_cast<PyObject*>(&TileLaunchConfiguration_type)) < 0)
         return ErrorRaised;
 
     if (PyType_Ready(&ArraySpecialization_type) < 0)
