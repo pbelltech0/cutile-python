@@ -1513,9 +1513,9 @@ def maximum(x, y, /, *, flush_to_zero: bool = False) -> TileOrScalar:
     pass
 
 
-@function
+@function(host=True)
 def cdiv(x, y, /) -> TileOrScalar:
-    """Computes ceil(x / y) for two integer tiles.
+    """Computes ceil(x / y). Can be used on the host.
 
     Args:
         x (Tile): int tile.
@@ -1533,6 +1533,7 @@ def cdiv(x, y, /) -> TileOrScalar:
         >>> ct.cdiv(7, 4)
         2
     """
+    return (x - 1) // y + 1
 
 
 # ======== Comparison ==============

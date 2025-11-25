@@ -114,6 +114,10 @@
 .. |machine representations| replace:: :ref:`machine representations <interoperability:Machine Representation>`
 .. |Machine representations| replace:: :ref:`Machine representations <interoperability:Machine Representation>`
 
+.. |operations| replace:: :ref:`operations <operations:Operations>`
+
+.. |loading and storing| replace:: :ref:`loading and storing <operations:Load/Store>`
+
 .. |factory| replace:: :ref:`factory <operations:Factory>`
 .. |Factory| replace:: :ref:`Factory <operations:Factory>`
 
