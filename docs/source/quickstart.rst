@@ -16,11 +16,11 @@ Prerequisites
 
 cuTile Python requires the following:   
 
+    - Linux x86_64, Linux aarch64 or Windows x86_64
     - A GPU with compute capability 10.x or 12.x
     - NVIDIA Driver r580 or later
     - CUDA Toolkit 13.1 or later
-    - The `PATH` environment variable must contain the path to the `bin/` directory of the CUDA Toolkit
-    - Python version 3.10 or higher
+    - Python version 3.10, 3.11, 3.12 or 3.13
 
 
 Installing cuTile Python
@@ -47,9 +47,9 @@ The quickstart sample on this page uses cupy, which can be installed with:
 
 The cuTile Python samples in the ``samples/`` directory also use pytest, torch, and numpy packages.
 
-For torch installation instructions, see `<https://pytorch.org/get-started/locally/>`__. 
+For PyTorch installation instructions, see `<https://pytorch.org/get-started/locally/>`__.
 
-Pytest and numpy can be installed with:
+Pytest and Numpy can be installed with:
 
 .. code-block::  bash
 
@@ -68,7 +68,7 @@ This example shows a structure common to cuTile kernels:
 * Write the resulting tile(s) out to GPU memory
 
 In this case, the kernel loads tiles from two vectors, ``a`` and ``b``. These loads create tiles called ``a_tile`` and ``b_tile``. These tiles are added together to form a third tile, called ``result``. In the last step, the kernel stores the ``result`` tile to the output vector ``c``.
-This code can be found in the cuTile Python repository at ``samples/quickstart/VectorAdd_quickstart.py``.
+More samples can be found in the cuTile Python `repository <https://github.com/nvidia/cutile-python>`_.
 
 .. literalinclude:: ../../samples/quickstart/VectorAdd_quickstart.py
    :language: python

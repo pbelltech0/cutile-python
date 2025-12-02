@@ -47,6 +47,7 @@
 .. |constant embedded| replace:: :ref:`constant embedded <execution:Constant Embedding>`
 .. |Constant embedded| replace:: :ref:`Constant embedded <execution:Constant Embedding>`
 
+.. |loosely typed| replace:: :ref:`loosely typed <execution:Constant Expressions & Objects>`
 .. |loosely typed numeric constant| replace:: :ref:`loosely typed numeric constant <execution:Constant Expressions & Objects>`
 .. |loosely typed numeric constants| replace:: :ref:`loosely typed numeric constants <execution:Constant Expressions & Objects>`
 
@@ -101,10 +102,10 @@
 .. |tile spaces| replace:: :ref:`tile spaces <data:Element & Tile Space>`
 .. |Tile spaces| replace:: :ref:`Tile spaces <data:Element & Tile Space>`
 
-.. |scalar| replace:: :ref:`scalar <data/scalar:cuda.tile.Scalar>`
-.. |Scalar| replace:: :ref:`Scalar <data/scalar:cuda.tile.Scalar>`
-.. |scalars| replace:: :ref:`scalars <data/scalar:cuda.tile.Scalar>`
-.. |Scalars| replace:: :ref:`Scalars <data/scalar:cuda.tile.Scalar>`
+.. |scalar| replace:: :ref:`scalar <data:Scalars>`
+.. |Scalar| replace:: :ref:`Scalar <data:Scalars>`
+.. |scalars| replace:: :ref:`scalars <data:Scalars>`
+.. |Scalars| replace:: :ref:`Scalars <data:Scalars>`
 
 .. |Rounding Modes| replace:: :ref:`Rounding Modes <data:Rounding Modes>`
 .. |Padding Modes| replace:: :ref:`Padding Modes <data:Padding Modes>`

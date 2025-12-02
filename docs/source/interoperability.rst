@@ -28,9 +28,3 @@ This includes:
 - Passing the same kinds of arrays to both tile and SIMT kernels.
 
 Inter-kernel interoperability shall be supported.
-
-Hybrid Kernels
-~~~~~~~~~~~~~~
-
-Hybrid kernels refer to kernels that contain both |tile code| and |SIMT code|.
-Hybrid kernels are not yet supported.

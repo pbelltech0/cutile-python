@@ -1728,7 +1728,12 @@ static PyMethodDef functions[] = {
     {"launch", reinterpret_cast<PyCFunction>(cuda_tile_launch), METH_FASTCALL,
         LAUNCH_SIGNATURE "\n"
         "--\n\n"
-        "Launch a cuTile kernel."
+        "Launch a cuTile kernel.\n\n"
+        "Args:\n"
+        "   stream: The CUDA stream to execute the |kernel| on.\n"
+        "   grid: Tuple of up to 3 grid dimensions to execute the |kernel| over.\n"
+        "   kernel: The |kernel| to execute.\n"
+        "   kernel_args: Positional arguments to pass to the kernel.\n"
     },
     NULL
 };

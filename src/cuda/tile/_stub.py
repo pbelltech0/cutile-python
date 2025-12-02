@@ -148,27 +148,38 @@ class Array:
     @property
     @function
     def dtype(self) -> "DType":
-        """The |data type| of the |array|'s elements."""
+        """The |data type| of the |array|'s elements.
+
+        Returns:
+            DType (constant):
+        """
 
     @property
     @function
     def shape(self) -> tuple[int, ...]:
-        """The number of elements in each of the |array|'s dimensions."""
+        """The number of elements in each of the |array|'s dimensions.
+
+        Returns:
+            tuple[int32,...]:
+        """
 
     @property
     @function
     def strides(self) -> tuple[int, ...]:
-        """The number of elements to step in each dimension while traversing the |array|."""
+        """The number of elements to step in each dimension while traversing the |array|.
 
-    @property
-    @function
-    def size(self) -> int:
-        """The number of elements in the |array|."""
+        Returns:
+            tuple[int32,...]:
+        """
 
     @property
     @function
     def ndim(self) -> int:
-        """The number of dimensions in the |array|."""
+        """The number of dimensions in the |array|.
+
+        Returns:
+            int (constant):
+        """
 
 
 class Tile:
@@ -188,35 +199,37 @@ class Tile:
     @property
     @function
     def dtype(self) -> "DType":
-        """The |data type| of the |tile|'s elements."""
+        """The |data type| of the |tile|'s elements.
+
+        Returns:
+            DType (constant):
+        """
 
     @property
     @function
     def shape(self) -> tuple[int, ...]:
-        """The number of elements in each of the |tile|'s dimensions."""
+        """The number of elements in each of the |tile|'s dimensions.
 
-    @property
-    @function
-    def strides(self) -> tuple[int, ...]:
-        """The number of elements to step in each dimension while traversing the |tile|."""
-
-    @property
-    @function
-    def size(self) -> int:
-        """The number of elements in the |tile|."""
+        Returns:
+            tuple[const int,...]:
+        """
 
     @property
     @function
     def ndim(self) -> int:
-        """The number of dimensions in the |tile|."""
+        """The number of dimensions in the |tile|.
+
+        Returns:
+            int (constant):
+        """
 
     @function
-    def item(self) -> "Scalar":
-        """Extract scalar from a single element tile.
+    def item(self) -> "Tile":
+        """Extract scalar (0D Tile) from a single element tile.
         Tile must contain only 1 element.
 
         Returns:
-            Scalar:
+            Tile: A 0D Tile usable as a scalar.
 
         Examples:
 
@@ -440,6 +453,9 @@ def num_tiles(array: Array, /,
         axis (const int): The axis of the tile partition space to get the dim size.
         shape (const int...): A sequence of const integers definining the shape of the tile.
         order ("C" or "F", or tuple[const int,...]): Order of axis mapping. See :py:func:`load`.
+
+    Returns:
+        int32
 
     Examples:
 

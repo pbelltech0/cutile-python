@@ -139,16 +139,16 @@ to a common dtype using the following process:
 Scalars
 -------
 
-A *scalar* is a single immutable value of a specific |data type|.
+A *scalar* is a single immutable value of a specific |data type|. A *scalar* and *0D-tile*
+can be used interchangably in a tile |kernel|. They can also be |kernel| parameters.
 
-|Scalars| can be used in |host code| and |tile code|.
-They can be |kernel| parameters.
+Typing of a *scalar* has the following rules:
 
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-
-   data/scalar
+- Constant scalars are |loosely typed| by default, for example, a literal ``2`` or
+  a constant property like ``Tile.ndim``, ``Tile.shape``, or ``Array.ndim``.
+- ``Array.shape`` and ``Array.stride`` are not constant by default and has default int type `int32`.
+  Using default `int32` makes kernel more performant at the cost of limiting max representable shape.
+  This limitation will be lifted in the near future.
 
 Tuples
 ------

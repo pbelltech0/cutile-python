@@ -1564,6 +1564,7 @@ def getattr_impl(object: Var, name: Var) -> Var:
         case ArrayTy(), "dtype": return loosely_typed_const(ty.dtype)
         case ArrayTy(), "ndim": return loosely_typed_const(ty.ndim)
         case ArrayTy(), "shape": return get_array_shape(object)
+        case ArrayTy(), "strides": return get_array_strides(object)
 
         case TileTy(), "dtype": return loosely_typed_const(ty.dtype)
         case TileTy(), "shape": return loosely_typed_const(ty.shape_value)

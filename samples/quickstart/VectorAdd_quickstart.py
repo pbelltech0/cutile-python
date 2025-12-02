@@ -7,8 +7,6 @@ Example demonstrating simple vector addition.
 Shows how to perform elementwise operations on vectors.
 """
 
-from math import ceil
-
 import cupy as cp
 import numpy as np
 import cuda.tile as ct
@@ -34,7 +32,7 @@ def test():
     # Create input data
     vector_size = 2**12
     tile_size = 2**4
-    grid = (ceil(vector_size / tile_size), 1, 1)
+    grid = (ct.cdiv(vector_size, tile_size), 1, 1)
 
     a = cp.random.uniform(-1, 1, vector_size)
     b = cp.random.uniform(-1, 1, vector_size)
