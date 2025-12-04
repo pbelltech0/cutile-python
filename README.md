@@ -79,5 +79,4 @@ Copyright and License Information
 ---------------------------------
 Copyright © 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 
-See the [LICENSES](LICENSES/) folder for the license information.
-
+cuTile-Python is under Apache 2.0 license. See the [LICENSES](LICENSES/) folder for the full license text.
